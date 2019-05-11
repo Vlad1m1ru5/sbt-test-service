@@ -1,6 +1,6 @@
 
-var stub = new Vue({
-    el: '#stub',
+var app = new Vue({
+    el: '#app',
     data: {
         message: 'Здесь будет контент!'
     }
