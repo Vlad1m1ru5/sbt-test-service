@@ -1,6 +1,13 @@
 package org.sber.service.testservice.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table
 public class Client {
+    // сгенерированный id для отображения в браузере
+    private Long id;
     private String uid;
     private String name;
     private String product;
