@@ -1,7 +1,6 @@
 package org.sber.service.testservice.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -10,20 +9,18 @@ import javax.persistence.Table;
 @Table
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Client {
     // сгенерированный id для отображения в браузере
+    @NonNull
     private Long id;
+    @NonNull
     private String uid;
+    @NonNull
     private String name;
+    @NonNull
     private String product;
 
-    public Client() {
 
-    }
-    
-    public Client(String uid, String name, String product, int balance) {
-        this.uid = uid;
-        this.name = name;
-        this.product = product;
-    }
 }
