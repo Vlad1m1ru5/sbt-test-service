@@ -20,10 +20,10 @@ Vue.component('clients-form', {
         }
     },
     watch: {
-        clientInput: function(newInput, oldInput) {
-            this.name= newInput.name;
-            this.balance = newInput.balance;
-            this.uid = newInput.uid;
+        clientInput: function(input) {
+            this.name= input.name;
+            this.balance = input.balance;
+            this.uid = input.uid;
         }
     },
     template:
@@ -44,7 +44,6 @@ Vue.component('clients-form', {
                     result.json().then(data => {
                         var index = getUid(this.uid, data.uid);
                         this.clients.splice(index, 1, data);
-                        this.name = '';
                         this.uid = '';
                     })
                 )
@@ -52,11 +51,12 @@ Vue.component('clients-form', {
                 clientsApi.save({}, input).then(result =>
                     result.json().then(data => {
                         this.clients.push(data);
-                        this.name = '';
-                        this.balance = '';
                     })
                 )
             }
+
+            this.name = '';
+            this.balance = '';
         }
     }
 });
@@ -65,17 +65,17 @@ Vue.component('clients-row', {
     props: ['client', 'editClient'],
     template:
         '<div >' +
-        '   {{ client.uid }}   {{ client.name }} {{ client.balance }}' +
-        '   <span>' +
-        '       <input type="button" value="Изменить" @click="edit"' +
-        '       <input type="button" value="Удалить" @click="delete"' +
+        '   {{ client.uid }} {{ client.name }} {{ client.balance }}' +
+        '   <span style="position: absolute; right: 0px">' +
+        '       <input type="button" value="Изменить" @click="edit"/>' +
+        '       <input type="button" value="Удалить" @click="del"/>' +
         '   </span>' +
         '</div>',
     methods: {
         edit: function() {
             this.editClient(this.client);
         },
-        delete: function () {
+        del: function () {
             clientsApi.remove({uid: this.client.uid}).then(result => {
                 if (result.ok) {
                     this.client.splice(this.clients.indexOf(this.client), 1);
@@ -93,7 +93,7 @@ Vue.component('clients-list', {
         }
     },
     template:
-        '<div>' +
+        '<div style="position: relative; width: 500px;">' +
         '   <clients-form :clients="clients" :clientInput="client"/>' +
         '   <clients-row v-for="client in clients" :key="client.uid" :client="client" :editClient="editClient"/>' +
         '</div>',
