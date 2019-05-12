@@ -16,10 +16,11 @@ import java.util.UUID;
 public class Client {
     @Id
     @NonNull
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    @Column(name = "uid", columnDefinition = "CHAR(32)", updatable = false, unique = true)
-    private UUID uid;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    //@GeneratedValue(generator = "uuid")
+    //@GenericGenerator(name = "uuid", strategy = "uuid2")
+    //@Column(name = "uid", columnDefinition = "CHAR(32)", updatable = false, unique = true)
+    private Integer uid;
     @NonNull
     private String name;
     @NonNull
