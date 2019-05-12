@@ -62,7 +62,7 @@ Vue.component('clients-form', {
 });
 
 Vue.component('clients-row', {
-    props: ['client', 'editClient'],
+    props: ['client', 'clients', 'editClient'],
     template:
         '<div >' +
         '   {{ client.uid }} {{ client.name }} {{ client.balance }}' +
@@ -95,7 +95,8 @@ Vue.component('clients-list', {
     template:
         '<div style="position: relative; width: 500px;">' +
         '   <clients-form :clients="clients" :clientInput="client"/>' +
-        '   <clients-row v-for="client in clients" :key="client.uid" :client="client" :editClient="editClient"/>' +
+        '   <clients-row v-for="client in clients" :key="client.uid" ' +
+        '   :client="client" :editClient="editClient" :clients="clients"/>' +
         '</div>',
     created: function() {
         clientsApi.get().then( result =>
