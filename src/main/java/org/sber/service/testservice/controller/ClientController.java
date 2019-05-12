@@ -10,12 +10,20 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("clients")
-public class ClientsController {
+public class ClientController {
     private int counter = 4;
     private List<Map<String, String>> clients = new ArrayList<Map<String, String>>() {{
-        add(new HashMap<String, String>() {{ put("id", "1"); put("client", "Ivan"); }});
-        add(new HashMap<String, String>() {{ put("id", "2"); put("client", "Vladimir"); }});
-        add(new HashMap<String, String>() {{ put("id", "3"); put("client", "Galina"); }});
+        add(new HashMap<String, String>() {{
+            put("id", "1"); put("name", "Ivan"); put("balance", "20000");
+        }});
+
+        add(new HashMap<String, String>() {{
+            put("id", "2"); put("name", "Vladimir"); put("balance", "30000");
+        }});
+
+        add(new HashMap<String, String>() {{
+            put("id", "3"); put("name", "Galina"); put("balance", "50000");
+        }});
     }};
 
     @GetMapping()

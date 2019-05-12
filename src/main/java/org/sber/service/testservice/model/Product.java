@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Client {
+public class Product {
     @Id
     @NonNull
     @GeneratedValue(generator = "uuid")
@@ -21,5 +21,5 @@ public class Client {
     @NonNull
     private String name;
     @NonNull
-    private String balance;
+    private String demand;
 }
