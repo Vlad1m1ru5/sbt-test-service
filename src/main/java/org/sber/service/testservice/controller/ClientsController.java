@@ -18,7 +18,7 @@ public class ClientsController {
         add(new HashMap<String, String>() {{ put("id", "3"); put("client", "Galina"); }});
     }};
 
-    @GetMapping("all")
+    @GetMapping()
     public List<Map<String, String>> getAll() {
         return clients;
     }
