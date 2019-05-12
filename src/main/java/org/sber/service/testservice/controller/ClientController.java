@@ -1,68 +1,47 @@
 package org.sber.service.testservice.controller;
 
-import org.sber.service.testservice.exception.NotFoundException;
+import org.sber.service.testservice.model.Client;
+import org.sber.service.testservice.repo.ClientRepo;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("clients")
 public class ClientController {
-    private int counter = 4;
-    private List<Map<String, String>> clients = new ArrayList<Map<String, String>>() {{
-        add(new HashMap<String, String>() {{
-            put("id", "1"); put("name", "Ivan"); put("balance", "20000");
-        }});
+    private final ClientRepo clientRepo;
 
-        add(new HashMap<String, String>() {{
-            put("id", "2"); put("name", "Vladimir"); put("balance", "30000");
-        }});
-
-        add(new HashMap<String, String>() {{
-            put("id", "3"); put("name", "Galina"); put("balance", "50000");
-        }});
-    }};
+    @Autowired
+    public ClientController(ClientRepo clientRepo) {
+        this.clientRepo = clientRepo;
+    }
 
     @GetMapping()
-    public List<Map<String, String>> getAll() {
-        return clients;
+    public List<Client> getAll() {
+        return clientRepo.findAll();
     }
 
     @GetMapping("{id}")
-    public Map<String, String> getOne(@PathVariable String id) {
-        return getClient(id);
-    }
-
-    private Map<String, String> getClient(@PathVariable String id) {
-        return clients.stream()
-                .filter(clients -> clients.get("id").equals(id))
-                .findFirst()
-                .orElseThrow(NotFoundException::new);
-    }
-
-    @PostMapping
-    public Map<String, String> create(@RequestBody Map<String, String> client) {
-        client.put("id", String.valueOf(counter++));
-        clients.add(client);
-
+    public Client getOne(@PathVariable("id") Client client) {
         return client;
     }
 
-    @PutMapping("{id}")
-    public Map<String, String> edit(@PathVariable String id, @RequestBody Map<String, String> client) {
-        Map<String, String> clientFromDb = getClient(id);
-        clientFromDb.putAll(client);
-        clientFromDb.put("id", id);
+    @PostMapping
+    public Client create(@RequestBody Client client) {
+        return clientRepo.save(client);
+    }
 
-        return clientFromDb;
+    @PutMapping("{id}")
+    public Client edit(@PathVariable("id") Client clientFromRepo, @RequestBody Client client
+    ) {
+        BeanUtils.copyProperties(client, clientFromRepo, "id");
+        return clientRepo.save(clientFromRepo);
     }
 
     @DeleteMapping("{id}")
-    public void delete(@PathVariable String id) {
-        Map<String, String> client = getClient(id);
-        clients.remove(client);
+    public void delete(@PathVariable("id") Client client) {
+        clientRepo.delete(client);
     }
 }

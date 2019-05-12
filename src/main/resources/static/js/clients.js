@@ -3,7 +3,7 @@ var clientsApi = Vue.resource('clients{/id}');
 
 Vue.component('clients-row', {
     props: ['client'],
-    template: '<div >{{ client.id }} {{ client.name }} {{ client.balance }}</div>'
+    template: '<div >{{ client.name }} {{ client.balance }}</div>'
 });
 
 Vue.component('clients-list', {

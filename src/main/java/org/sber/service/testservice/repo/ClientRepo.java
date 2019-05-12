@@ -1,7 +1,9 @@
 package org.sber.service.testservice.repo;
 
 import org.sber.service.testservice.model.Client;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ClientRepo extends CrudRepository<Client, String> {
+import java.util.UUID;
+
+public interface ClientRepo extends JpaRepository<Client, UUID> {
 }
