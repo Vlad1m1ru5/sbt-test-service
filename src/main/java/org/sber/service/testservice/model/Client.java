@@ -9,28 +9,17 @@ import java.util.UUID;
 @Table
 public class Client {
     @Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(length = 16)
     private UUID uid;
-    //private Integer uid;
     private String name;
     private String balance;
-
-    /**
-     *  public Integer getUid() {
-     *         return uid;
-     *     }
-     *
-     *     public void setUid(Integer uid) {
-     *         this.uid = uid;
-     *     }
-     */
 
     public UUID getUid() {
         return uid;
     }
+
     public void setUid(UUID uid) {
         this.uid = uid;
     }
