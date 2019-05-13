@@ -40,9 +40,10 @@ Vue.component('clients-form', {
             };
 
             if (this.uid) {
-                clientsApi.update({uid: this.uid}, input).then(result =>
+                clientsApi.update({id: this.uid}, input).then(result =>
                     result.json().then(data => {
-                        var index = getUid(this.uid, data.uid);
+                        var index = getUid(this.clients, data.uid);
+
                         this.clients.splice(index, 1, data);
                         this.uid = '';
                     })
@@ -75,10 +76,10 @@ Vue.component('clients-row', {
         edit: function() {
             this.editClient(this.client);
         },
-        del: function () {
-            clientsApi.remove({uid: this.client.uid}).then(result => {
+        del: function() {
+            clientsApi.remove({id: this.client.uid}).then(result => {
                 if (result.ok) {
-                    this.client.splice(this.clients.indexOf(this.client), 1);
+                    this.clients.splice(this.clients.indexOf(this.client), 1);
                 }
             })
         }
