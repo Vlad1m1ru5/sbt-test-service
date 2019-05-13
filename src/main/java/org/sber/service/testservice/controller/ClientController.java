@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("clients")
@@ -34,9 +35,8 @@ public class ClientController {
     }
 
     @PutMapping("{id}")
-    public Client edit(@PathVariable("id") Client clientFromRepo, @RequestBody Client client
-    ) {
-        BeanUtils.copyProperties(client, clientFromRepo, "id");
+    public Client edit(@PathVariable("id") Client clientFromRepo, @RequestBody Client client) {
+        BeanUtils.copyProperties(client, clientFromRepo, "uid");
         return clientRepo.save(clientFromRepo);
     }
 
