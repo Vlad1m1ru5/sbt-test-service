@@ -4,6 +4,7 @@ import org.sber.service.testservice.model.Client;
 import org.sber.service.testservice.repo.ClientRepo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,7 +35,7 @@ public class ClientController {
     }
 
     @PutMapping("{id}")
-    public Client edit(@PathVariable("id") Client clientFromRepo, @RequestBody Client client) {
+    public Client edit(@NonNull @PathVariable("id") Client clientFromRepo,  @NonNull @RequestBody Client client) {
         BeanUtils.copyProperties(client, clientFromRepo, "uid");
         return clientRepo.save(clientFromRepo);
     }

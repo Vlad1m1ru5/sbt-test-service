@@ -20,7 +20,7 @@ Vue.component('clients-form', {
         }
     },
     watch: {
-        clientInput: function(input) {
+        clientInput: function(input, oldInput) {
             this.name= input.name;
             this.balance = input.balance;
             this.uid = input.uid;
@@ -67,7 +67,7 @@ Vue.component('clients-row', {
     template:
         '<div >' +
         '   {{ client.uid }} {{ client.name }} {{ client.balance }}' +
-        '   <span style="position: absolute; right: 0px">' +
+        '   <span style="position: absolute; right: 0px;">' +
         '       <input type="button" value="Изменить" @click="edit"/>' +
         '       <input type="button" value="Удалить" @click="del"/>' +
         '   </span>' +
@@ -94,7 +94,7 @@ Vue.component('clients-list', {
         }
     },
     template:
-        '<div style="position: relative; width: 500px;">' +
+        '<div style="position: relative; width: 700px;">' +
         '   <clients-form :clients="clients" :clientInput="client"/>' +
         '   <clients-row v-for="client in clients" :key="client.uid" ' +
         '   :client="client" :editClient="editClient" :clients="clients"/>' +
@@ -102,7 +102,8 @@ Vue.component('clients-list', {
     created: function() {
         clientsApi.get().then( result =>
             result.json().then( data =>
-                data.forEach(client => this.clients.push(client))
+                data.forEach(client =>
+                    this.clients.push(client))
             )
         )
     },
