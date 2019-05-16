@@ -7,14 +7,14 @@ import java.util.UUID;
 
 @Entity
 @Table
-public class Client {
+public class Product {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(length = 16)
     private UUID uid;
     private String name;
-    private String balance;
+    private String demand;
 
     public UUID getUid() {
         return uid;
@@ -32,20 +32,20 @@ public class Client {
         this.name = name;
     }
 
-    public String getBalance() {
-        return balance;
+    public String getDemand() {
+        return demand;
     }
 
-    public void setBalance(String balance) {
-        this.balance = balance;
+    public void setDemand(String demand) {
+        this.demand = demand;
     }
 
     @Override
     public String toString() {
-        return "Client{" +
+        return "Product{" +
                 "uid=" + uid +
                 ", name='" + name + '\'' +
-                ", balance='" + balance + '\'' +
+                ", demand='" + demand + '\'' +
                 '}';
     }
 }

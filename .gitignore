@@ -2,6 +2,10 @@ HELP.md
 /target/
 !.mvn/wrapper/maven-wrapper.jar
 
+### LOGS ###
+/logs/*.log
+/logs/archived/
+
 ### STS ###
 .apt_generated
 .classpath
