@@ -2,6 +2,8 @@ package org.sber.service.testservice.controller;
 
 import org.sber.service.testservice.model.Client;
 import org.sber.service.testservice.repo.ClientRepo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
@@ -12,8 +14,9 @@ import java.util.List;
 @RestController
 @RequestMapping("clients")
 public class ClientController {
-    
+
     private final ClientRepo clientRepo;
+    private static final Logger LOGGER = LoggerFactory.getLogger("LOGS");
 
     @Autowired
     public ClientController(ClientRepo clientRepo) {

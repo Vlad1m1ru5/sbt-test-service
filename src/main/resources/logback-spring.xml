@@ -1,37 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <!-- Каталог логов -->
-    <porperty name="LOGS" value="./los"/>
+    <!-- Стандартный логгер spring-framework-boot -->
+    <!-- <include resource="org/springframework/boot/logging/logback/base.xml"/> -->
+    <!-- Каталог для файлов логов -->
+    <property name="LOGS" value="./logs"/>
 
     <!-- Логирование в консоль -->
     <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
-        <layout class="ch.qos.logback.classic.PatternLayout">
+        <encoder>
             <Pattern>
-                <ConversionPattern></ConversionPattern>
+                    %d{yyyy-MM-dd HH:mm:ss.SSS} %yellow(%-5level) [%thread] %green(%logger{36}) - %msg%n
             </Pattern>
-        </layout>
+        </encoder>
     </appender>
 
     <!-- Логирование в файл -->
     <appender name="RollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOGS}/spring-boot-logger.log</file>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <Pattern>%d %p %C{1.} [%t] %m%n</Pattern>
+            <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{36} - %msg%n
+            </Pattern>
         </encoder>
-
         <!-- Ограничения на файл -->
-        <rollingPolic class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- Архивирование логов каждый день -->
             <fileNamePattern>${LOGS}/archived/spring-boot-logger-%d{dd:MM:yyyy}.%i.log</fileNamePattern>
+            <!-- Архивирование логов по объёму файла -->
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>10MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
-        </rollingPolic>
+            <!-- Ограничение количества файлов в архиве -->
+            <maxHistory>10</maxHistory>
+        </rollingPolicy>
     </appender>
 
-    <!-- Логирование на уровне DEBUG -->
-    <root level="debug">
+    <!-- Логирование каталога на уровне trace -->
+    <logger name="org.sber.service.testservice" level="trace">
         <appender-ref ref="Console"/>
         <appender-ref ref="RollingFile"/>
-    </root>
-
+    </logger>
 </configuration>
