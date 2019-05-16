@@ -28,7 +28,7 @@ Vue.component('products-form', {
     },
     template:
         '<div>' +
-        '   <input type="text" placeholder="Наименованеи продукта" v-model="name"/>' +
+        '   <input type="text" placeholder="Наименование продукта" v-model="name"/>' +
         '   <input type="text" placeholder="Востребованность" v-model="demand"/>' +
         '   <input type="button" value="Сохранить" @click="save"/>' +
         '</div>',
@@ -114,7 +114,7 @@ Vue.component('products-list', {
     }
 });
 
-var app = new Vue({
+var productsApp = new Vue({
     el: '#products',
     template: '<products-list :products="products"/>',
     data: {

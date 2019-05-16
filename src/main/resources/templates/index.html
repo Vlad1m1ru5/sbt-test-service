@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Web service</title>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
-</head>
-<body>
-    <!--
-    <h3>Список клиентов</h3>
-    <div id="clients">{{ clients }}</div>
-    <script src="/js/clients.js"></script>
-    -->
-    <h3>Список продуктов</h3>
-    <div id="products">{{ products }}</div>
-    <script src="/js/products.js"></script>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Web service</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+    </head>
+    <body>
+        <h1>Приложение клиент-продукт</h1>
+        <!--<div id="app">{{ main }}</div>
+        <script src="/js/main.js"></script>-->
+        <div style="position: relative; width: 700px;">
+            <input id="clients" type="button" value="Клиенты">
+                <script src="/js/clients.js"></script>
+            </input>
+            <input id="products" type="button" value="Продукты">
+                <script src="/js/products.js"></script>
+            </input>
+        </div>
+    </body>
 </html>
