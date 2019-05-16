@@ -115,7 +115,7 @@ Vue.component('clients-list', {
 });
 
 var app = new Vue({
-    el: '#app',
+    el: '#clients',
     template: '<clients-list :clients="clients"/>',
     data: {
         clients: []

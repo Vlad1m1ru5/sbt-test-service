@@ -14,38 +14,45 @@ import java.util.List;
 @RestController
 @RequestMapping("clients")
 public class ClientController {
-
     private final ClientRepo clientRepo;
-    private static final Logger LOGGER = LoggerFactory.getLogger("LOGS");
+    private static final Logger LOGGER = LoggerFactory.getLogger(ClientController.class);
 
     @Autowired
     public ClientController(ClientRepo clientRepo) {
+        LOGGER.info("INIT Clients repository");
         this.clientRepo = clientRepo;
     }
 
     @GetMapping()
     public List<Client> getAll() {
+        for (Client client : clientRepo.findAll()) {
+            LOGGER.info("GET ALL " + client.toString());
+        }
         return clientRepo.findAll();
     }
 
     @GetMapping("{id}")
     public Client getOne(@PathVariable("id") Client client) {
+        LOGGER.info("GET " + client.toString());
         return client;
     }
 
     @PostMapping
     public Client create(@RequestBody Client client) {
+        LOGGER.info("CREATE " + client.toString());
         return clientRepo.save(client);
     }
 
     @PutMapping("{id}")
     public Client edit(@NonNull @PathVariable("id") Client clientFromRepo,  @NonNull @RequestBody Client client) {
+        LOGGER.info("EDIT " + clientFromRepo.toString() + " TO " + client.toString());
         BeanUtils.copyProperties(client, clientFromRepo, "uid");
         return clientRepo.save(clientFromRepo);
     }
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable("id") Client client) {
+        LOGGER.info("DELETE " + client.toString());
         clientRepo.delete(client);
     }
 }

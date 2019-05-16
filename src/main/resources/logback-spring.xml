@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <!-- Стандартный логгер spring-framework-boot -->
-    <!-- <include resource="org/springframework/boot/logging/logback/base.xml"/> -->
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
     <!-- Каталог для файлов логов -->
     <property name="LOGS" value="./logs"/>
 
     <!-- Логирование в консоль -->
+    <!--
     <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <Pattern>
-                    %d{yyyy-MM-dd HH:mm:ss.SSS} %yellow(%-5level) [%thread] %green(%logger{36}) - %msg%n
+                    %d{yyyy-MM-dd HH:mm:ss.SSS} %yellow(%-5level) [%thread] %blue(%logger{36}) - %msg%n
             </Pattern>
         </encoder>
     </appender>
+    -->
 
     <!-- Логирование в файл -->
     <appender name="RollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -37,7 +39,6 @@
 
     <!-- Логирование каталога на уровне trace -->
     <logger name="org.sber.service.testservice" level="trace">
-        <appender-ref ref="Console"/>
         <appender-ref ref="RollingFile"/>
     </logger>
 </configuration>
