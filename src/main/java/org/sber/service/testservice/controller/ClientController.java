@@ -44,7 +44,7 @@ public class ClientController {
     }
 
     @PutMapping("{id}")
-    public Client edit(@NonNull @PathVariable("id") Client clientFromRepo,  @NonNull @RequestBody Client client) {
+    public Client edit( @PathVariable("id") Client clientFromRepo,  @RequestBody Client client) {
         LOGGER.info("EDIT " + clientFromRepo.toString() + " TO " + client.toString());
         BeanUtils.copyProperties(client, clientFromRepo, "uid");
         return clientRepo.save(clientFromRepo);

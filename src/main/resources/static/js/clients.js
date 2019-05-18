@@ -103,7 +103,8 @@ Vue.component('clients-list', {
         clientsApi.get().then( result =>
             result.json().then( data =>
                 data.forEach(client =>
-                    this.clients.push(client))
+                    this.clients.push(client)
+                )
             )
         )
     },
