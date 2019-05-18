@@ -1,15 +1,44 @@
 var clientsProductsApi = Vue.resource('clients-products{/id}');
+var clientsApi = Vue.resource('clients');
+var productsApi = Vue.resource('products');
+
+Vue.component('clients-products-row', {
+    props: ['message', 'messages', 'editMessage'],
+    template:
+        '<div>' +
+        '   {{ message.uid}} {{ message.clientName}} {{message.productName}}' +
+        '   <span style="position: absolute; right:0px;">' +
+        '       <input type="button" value="Изменить" @click="edit"/>' +
+        '       <input type="button" value="Удалмить" @click="del"/>' +
+        '   </span>' +
+        '</div>',
+    methods: {
+        edit: function() {
+            this.editMessage(this.message);
+        },
+        del: function() {
+            clientsProductsApi.remove({id: this.message.uid}).then( result => {
+                if(result.ok){
+                    this.messages.splice(this.messages.indexOf(this.message), 1);
+                }
+            })
+        }
+    }
+});
 
 Vue.component('clients-products-form', {
-    props: ['message', 'messageInput'],
+    props: ['messages', 'messageInput'],
     data: function() {
-       return {
-           uid: '',
-           clientUid: '',
-           clientName: '',
-           productUid: '',
-           productName: ''
-       }
+        return {
+            clients: clientsApi.getAll(),
+            products: productsApi.getAll(),
+
+            uid: '',
+            clientUid: '',
+            clientName: '',
+            productUid: '',
+            productName: ''
+        }
     },
     watch: {
         messageInput: function(input, oldInput) {
@@ -28,12 +57,53 @@ Vue.component('clients-products-form', {
         '   <select v-model="selectedProduct">' +
         '       <optin v-for="product in products" v-bind:value="product">{{ product.uid }}</optin>' +
         '   </select>' +
-        '   <input type="button" value="Сохранить" @click="save"/>' +
-        '</div>'
+        '   <span> ' +
+        '       <input type="button" value="Сохранить" @click="save"/>' +
+        '       <input type="button" value="Обновить" @click="update"/>' +
+        '   </span>' +
+        '</div>',
+    methods: {
+        save: function() {
+            var input = {
+                clientName: this.clientName,
+                clientUid: this.clientUid,
+                productName: this.productName,
+                productUid: this.productUid
+            };
+
+            if (this.uid) {
+                clientsProductsApi.update({id: this.uid}, input).then(result => {
+                    result.json().then(data => {
+                        var index = getUid(this.messages, data.uid);
+
+                        this.messages.splice(index, 1, data);
+                        this.uid = '';
+                    })
+                })
+            } else {
+                clientsProductsApi.save({}, input).then(result => {
+                    result.json().then(data => {
+                        this.messages.push(data);
+                    })
+                })
+            }
+        },
+
+        update: function(){
+            //TODO
+            //  update clients and products values
+            //  to get clients and products values
+        }
+    }
 });
 
 Vue.component('clients-products-list', {
-    props: 'messages',
+    props: ['messages'],
+    data: function() {
+       return {
+           message:null
+       }
+    },
     template:
         '<div>' +
         '   <clients-products-form :messages="messages" :messageInput="message"/>' +
@@ -41,8 +111,8 @@ Vue.component('clients-products-list', {
         '   :message="message" :editMessage="editMessage" :messages="messages"/>' +
         '</div>',
     created: function () {
-        clientsProductsApi.get().then(result =>
-            result.json().then(data =>
+        clientsProductsApi.get().then( result =>
+            result.json().then( data =>
                 data.forEach(message =>
                     this.messages.push(message)
                 )
@@ -50,7 +120,7 @@ Vue.component('clients-products-list', {
         )
     },
     methods: {
-        editMessage: function () {
+        editMessage: function (message) {
             this.message = message;
         }
     }

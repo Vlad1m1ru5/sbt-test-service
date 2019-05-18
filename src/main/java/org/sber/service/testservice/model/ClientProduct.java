@@ -13,10 +13,12 @@ public class ClientProduct {
     @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(length = 16)
     private UUID uid;
+    @Column(length = 16)
     private UUID clientUid;
     private String clientName;
+    @Column(length = 16)
     private UUID productUid;
-    private Product productName;
+    private String productName;
 
     public UUID getUid() {
         return uid;
@@ -50,11 +52,11 @@ public class ClientProduct {
         this.productUid = productUid;
     }
 
-    public Product getProductName() {
+    public String getProductName() {
         return productName;
     }
 
-    public void setProductName(Product productName) {
+    public void setProductName(String productName) {
         this.productName = productName;
     }
 

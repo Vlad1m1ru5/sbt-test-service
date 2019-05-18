@@ -41,7 +41,7 @@ public class ClientProductController {
         return clientProductRepo.save(clientProduct);
     }
 
-    @GetMapping("{id}")
+    @PutMapping("{id}")
     public ClientProduct edit(@PathVariable("id") ClientProduct clientProductFromRepo, @RequestBody ClientProduct clientProduct) {
         LOGGER.info("EDIT " + clientProductFromRepo.toString() + " TO " + clientProduct.toString());
         BeanUtils.copyProperties(clientProduct, clientProductFromRepo, "uid");

@@ -1,3 +1,15 @@
+import Vue from 'vue'
+import VueResource from 'vue-resource'
+import App from 'pages/Clients.vue'
+
+Vue.use(VueResource)
+
+new Vuew({
+    el: '#clients',
+    render: a => a(App)
+});
+
+/*
 var clientsApi = Vue.resource('clients{/id}');
 
 function getUid(list, uid) {
@@ -85,7 +97,9 @@ Vue.component('clients-row', {
         }
     }
 });
+*/
 
+/*
 Vue.component('clients-list', {
     props:  ['clients'],
     data: function() {
@@ -100,11 +114,10 @@ Vue.component('clients-list', {
         '   :client="client" :editClient="editClient" :clients="clients"/>' +
         '</div>',
     created: function() {
-        clientsApi.get().then( result =>
+        productsApi.get().then(result =>
             result.json().then( data =>
-                data.forEach(client =>
-                    this.clients.push(client)
-                )
+                data.forEach(product =>
+                    this.products.push(product))
             )
         )
     },
@@ -114,7 +127,12 @@ Vue.component('clients-list', {
         }
     }
 });
+*/
 
+
+
+
+/*
 var clientsApp = new Vue({
     el: '#clients',
     template: '<clients-list :clients="clients"/>',
@@ -122,3 +140,4 @@ var clientsApp = new Vue({
         clients: []
     }
 });
+*/
