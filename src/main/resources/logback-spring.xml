@@ -38,7 +38,7 @@
     </appender>
 
     <!-- Логирование каталога на уровне trace -->
-    <logger name="org.sber.service.testservice" level="trace">
+    <logger name="org.sber.service.testservice" level="info">
         <appender-ref ref="RollingFile"/>
     </logger>
 </configuration>

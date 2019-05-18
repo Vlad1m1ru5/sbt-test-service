@@ -44,7 +44,7 @@ public class ProductController {
     }
 
     @PutMapping("{id}")
-    public Product edit(@NonNull @PathVariable("id") Product productFromRepo,@NonNull @RequestBody Product product) {
+    public Product edit( @PathVariable("id") Product productFromRepo, @RequestBody Product product) {
         LOGGER.info("EDIT " + productFromRepo.toString() + " TO " + product.toString());
         BeanUtils.copyProperties(product, productFromRepo, "uid");
         return productRepo.save(productFromRepo);

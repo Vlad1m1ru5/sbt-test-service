@@ -1,21 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
         <title>Web service</title>
+        <!--
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+        -->
+        <script th:inline="javascript">
+            var testServiceData = [[${testServiceData}]]
+        </script>
     </head>
     <body>
         <h1>Приложение клиент-продукт</h1>
-        <!--<div id="app">{{ main }}</div>
-        <script src="/js/main.js"></script>-->
         <div style="position: relative; width: 700px;">
-            <input id="clients" type="button" value="Клиенты">
-                <script src="/js/clients.js"></script>
+            <h3>Клиенты-продукты</h3>
+            <input id="clients-products" type="button" value="Клиенты-продукты">
+                <!--<script src="/js/clients-products.js"></script>-->
+                <script th:src="'/js/main.js'"></script>
             </input>
+            <h3>Клиенты</h3>
+
+            <input id="clients" type="button" value="Клиенты">
+                <!-- <script src="/js/clients.js"></script> -->
+                <script th:src="'/js/clients.js'"></script>
+            </input>
+
+            <h3>Продукты</h3>
             <input id="products" type="button" value="Продукты">
-                <script src="/js/products.js"></script>
+                <!-- <script src="/js/products.js"></script> -->
+            <script th:src="'/js/main.js'"></script>
             </input>
         </div>
     </body>
