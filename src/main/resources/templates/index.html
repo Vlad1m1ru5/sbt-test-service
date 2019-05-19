@@ -15,22 +15,25 @@
         <h1>Приложение клиент-продукт</h1>
         <div style="position: relative; width: 700px;">
             <h3>Клиенты-продукты</h3>
-            <input id="clients-products" type="button" value="Клиенты-продукты">
-                <!--<script src="/js/clients-products.js"></script>-->
-                <script th:src="'/js/main.js'"></script>
-            </input>
-            <h3>Клиенты</h3>
+            <!--<input id="clients-products" type="button" value="Клиенты-продукты">
+                <script src="/js/clients-products.js"></script>
+            </input>-->
+            <div id="clients-products">{{ clients-products }}</div>
+            <script th:src="'js/main.js'"></script>
 
-            <input id="clients" type="button" value="Клиенты">
-                <!-- <script src="/js/clients.js"></script> -->
-                <script th:src="'/js/clients.js'"></script>
-            </input>
+            <h3>Клиенты</h3>
+            <!--<input id="clients" type="button" value="Клиенты">
+                <script src="/js/clients.js"></script>
+            </input>-->
+            <div id="clients">{{ clients }}</div>
+            <script th:src="'js/clients.js'"></script>
 
             <h3>Продукты</h3>
-            <input id="products" type="button" value="Продукты">
-                <!-- <script src="/js/products.js"></script> -->
-            <script th:src="'/js/main.js'"></script>
-            </input>
+            <!-- <input id="products" type="button" value="Продукты">
+                <script src="/js/products.js"></script>
+            </input>-->
+            <div id="products">{{ products }}</div>
+            <script th:src="'js/products.js'"></script>
         </div>
     </body>
 </html>

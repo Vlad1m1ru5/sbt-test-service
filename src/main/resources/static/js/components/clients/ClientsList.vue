@@ -1,22 +1,29 @@
 <template>
     <div style="position: relative; width: 700px;">
-        <clients-form :clients="clients" :clientInput="client"/>
-        <clients-row v-for="client in clients"
-                     :key="client.uid"
-                     :client="client"
-                     :editClient="editClient"
-                     :deleteClient="deleteClient"
-                     :clients="clients"/>
+        <clients-form
+                :clients="clients"
+                :clientInput="client">
+        </clients-form>
+        <clients-row
+                v-for="client in clients"
+                    :key="client.uid"
+                    :client="client"
+                    :editClient="editClient"
+                    :deleteClient="deleteClient"
+                    :clients="clients">
+        </clients-row>
     </div>
 </template>
 
 <script>
-    import ClientsRow from 'components/clients/ClietnsRow.vue'
+    import ClientsRow from 'components\\clients\\ClientsRow.vue'
+    import ClientsForm from 'components\\clients\\ClientsForm.vue'
 
     export default {
         props: ['clients'],
         components: {
-          ClientsRow
+            ClientsRow,
+            ClientsForm
         },
         data() {
             return {

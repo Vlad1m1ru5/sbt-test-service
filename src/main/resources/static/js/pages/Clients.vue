@@ -1,15 +1,18 @@
 <template>
-    <clients-list :clients="clients"/>
+    <clients-list :clients="clients"></clients-list>
 </template>
 
 <script>
-    import ClientsList from 'components/clients/ClietnsList.vue'
+    import ClientsList from 'components\\clients\\ClientsList.vue'
 
     export default {
-        components:
-            ClientsList,
+        components: {
+            ClientsList
+        },
         data() {
-            clients: testServiceData.clientsData
+            return {
+                clients: testServiceData.clientsData
+            }
         }
     }
 </script>

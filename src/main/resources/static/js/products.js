@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 var productsApi = Vue.resource('products{/id}');
 
 function getUid(list, uid) {

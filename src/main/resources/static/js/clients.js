@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import VueResource from 'vue-resource'
-import App from 'pages/Clients.vue'
+import Clients from 'pages\\Clients.vue'
 
-Vue.use(VueResource)
+Vue.use(VueResource);
 
-new Vuew({
+new Vue({
     el: '#clients',
-    render: a => a(App)
+    render: a => a(Clients)
 });
 
 /*
@@ -21,7 +21,9 @@ function getUid(list, uid) {
 
     return -1;
 }
+*/
 
+/*
 Vue.component('clients-form', {
     props: ['clients', 'clientInput'],
     data: function() {
@@ -73,7 +75,9 @@ Vue.component('clients-form', {
         }
     }
 });
+*/
 
+/*
 Vue.component('clients-row', {
     props: ['client', 'clients', 'editClient'],
     template:
